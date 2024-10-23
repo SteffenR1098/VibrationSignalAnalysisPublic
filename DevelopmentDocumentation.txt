@@ -1,0 +1,6 @@
+Documentation of steps to develop this showcase.
+
+1. Create helper py file to centrally store all parameters and function to provide. - helper_functions.py
+2. Create helper py file to provide functions for SQLite DB - 
+x. Create SQLite DBs (DataScource and AiMonitor) and create tables. - create_DBs_and_tables.py
+x. Create test simulated data and store in DataScource DB. 
