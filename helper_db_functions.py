@@ -4,6 +4,10 @@
 
 import sqlite3
 from sqlite3 import Error
+import numpy as np
+import io
+
+# ======================================================
 
 def create_connection(db_file):
     # Create connection to DB
@@ -20,6 +24,7 @@ def create_connection(db_file):
 
     return db_conn
 
+# ======================================================
 
 def show_tables(db_conn):
     # Show all tables in DB
@@ -34,6 +39,7 @@ def show_tables(db_conn):
 
     return None
 
+# ======================================================
 
 def show_data(db_conn, table):
     # Show all data of table
@@ -53,6 +59,7 @@ def show_data(db_conn, table):
 
     return None
 
+# ======================================================
 
 def show_some_data(db_conn, table):
     # Show data of first 10 rows of table
@@ -73,6 +80,7 @@ def show_some_data(db_conn, table):
 
     return None
 
+# ======================================================
 
 def delete_data(db_conn, table):
     # Delete all rows in table
@@ -89,6 +97,8 @@ def delete_data(db_conn, table):
 
     return None
 
+# ======================================================
+
 def vacuum_db(db_conn):
     # Cleans up database and releases memory after deleting data
     # param: db_conn - Connection object
@@ -103,6 +113,105 @@ def vacuum_db(db_conn):
 
     return None
 
+# ======================================================
+
+def trans_ndarray2blob(ndarray):
+    #print('++ Transform ndarray to blob')
+    out = io.BytesIO()
+    np.save(out, ndarray)
+    out.seek(0)
+    return sqlite3.Binary(out.read())
+
+def trans_blob2ndarray(text):
+    #print('++ Transform blob to ndarray')
+    out = io.BytesIO(text)
+    out.seek(0)
+    return np.load(out)
+
+# ======================================================
+
+def insert_blob_data(db_conn, table_name, data, data_class):
+    # param: Connection object
+    # param: data
+    # return: Cursor index
+
+    #print(f'++ Write signals of type: {data_class} as blob to db.')
+    #print(f'++ Shape of row data: {np.shape(data)}, type of {type(data)}')
+
+    # ==== create SQL statement ====
+
+    sql_insert_table_command = f'INSERT INTO {table_name} (classid, data) VALUES (?,?)'
+
+    # ---------------------------------------------------
+
+    cur = db_conn.cursor()
+
+    # === insert data row by row
+    for index in range(0, len(data)):
+
+        #print(f'++++ Insert data set{index} in tables of DB.')
+
+        #print('-------------------------------------------')
+
+        #print(f'++ Shape of row data: {np.shape(data[index,:])}, type of {type(data[index,:])}')
+
+        data_blob = trans_ndarray2blob(data[index,:])
+
+        cur.execute(sql_insert_table_command, (data_class, data_blob))
+        #db_conn.commit()
+
+        #print(f'++++ Id of data set: {cur.lastrowid}.')
+
+    return None
+
+# ======================================================
+
+def get_blob_data(db_conn, table_name, data_class):
+     # param: Connection object
+    # param: data_class
+    # param: mode
+    # return: return_list
+    # return: classid_list
+
+    #print(f'++ Read data from table {table_name}.')
+
+    cur = db_conn.cursor()
+
+    sql_getdata_command = f'SELECT * FROM {table_name} WHERE classid = {data_class}'
+
+    cur.execute(sql_getdata_command)
+
+    rows = cur.fetchall()  # returns class 'list'
+
+    # print(f'++ Shape of row data: {np.shape(rows)}, type of {type(rows)}')
+    # size_rows = np.shape(rows)
+    # print(f'++ Size of rows {size_rows[0]}')
+
+    size_rows = np.shape(rows)
+    amount_of_signals = size_rows[0]
+    amount_floats = 4096
+
+    data_values = np.zeros(shape=(amount_of_signals, amount_floats))
+    classid_list = []
+
+    index = 0
+
+    for row in rows:  
+
+        data = row[2]
+        data_convert = trans_blob2ndarray(data)
+
+        data_values[index, :] = data_convert
+
+        classid_list.append(row[1])
+
+        index += 1
+
+    #return data_values, classid_list
+    data_values_32 = np.float32(data_values)
+    return data_values_32
+
+# ======================================================
 
 def commit_data(db_conn):
     # Commit all changes to DB
@@ -115,6 +224,7 @@ def commit_data(db_conn):
 
     return None
 
+# ======================================================
 
 def close_connection(db_conn):
     # param: db_conn - Connection object
@@ -131,3 +241,5 @@ def close_connection(db_conn):
         print(f'++ Connection closed.')
 
     return None
+
+# ======================================================

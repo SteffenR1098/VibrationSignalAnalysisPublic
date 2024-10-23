@@ -25,7 +25,7 @@ monitor_table_name = get_db_parameter('monitor_table_name')
 # Data source DB & table
 # ========================================================
 
-if create_data_source_db == 1^:
+if create_data_source_db == 1:
 
     # == Create connection to DB. If db does not yet exist it is created.
     print('-- connect to data source DB')
