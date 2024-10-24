@@ -16,7 +16,37 @@ def get_db_parameter(param_type):
         return 'monitor_data_table'
     else:
         return None
+    
+# ========================================================
+# Get AI parameter
 
+def get_AI_parameter(param_type):
+
+    #print('get_AI_parameter')
+    #print(param_type)
+    
+    if param_type == 'model_file':
+        return r'SaveMLModel\model.ai'
+    elif param_type == 'test_train_split':
+        return 0.5
+    else:
+        return None
+
+# ========================================================
+# Get parameter for data generation
+
+def get_operational_parameter(param_type):
+
+    if param_type == 'producer_wait_time':
+        return 3 #in seconds
+    elif param_type == 'operational_wait_time':
+        return 0 #in seconds
+    elif param_type == 'max_data_producer':
+        return 400
+    # elif param_type == '':
+    else:
+        return None
+    
 # ========================================================
 # Get parameter for data generation
 
@@ -24,9 +54,8 @@ def get_parameter(param_type):
 
     if param_type == 'amount_of_signals':
         return 1000
-    elif param_type == 'ratio_test_train':
-        # amount of data to used for tests
-        return 0.8
+    elif param_type == 'signal_length':
+        return 4096
     elif param_type == 'good_first_peak_low':
         return 100
     elif param_type == 'good_first_peak_high':

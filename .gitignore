@@ -5,6 +5,7 @@ __pycache__/
 
 #py files
 save.py
+test.py
 
 # C extensions
 *.so

@@ -20,7 +20,7 @@ def create_connection(db_file):
     except Error as e:
         print(e)
 
-    print(f'++ Connected to {db_file}.')
+    #print(f'++ Connected to {db_file}.')
 
     return db_conn
 
@@ -237,9 +237,21 @@ def close_connection(db_conn):
             print('++ No Connection object.')
     except Error as e:
         print(e)
-    finally:
-        print(f'++ Connection closed.')
 
     return None
 
 # ======================================================
+
+def state_is_UTF8(state):
+
+    if 'decode' not in dir(state):
+        return False
+
+    try:
+        state.decode('UTF-8')
+    except Error:
+        return False
+    else:
+        return True
+    
+# ========================================================

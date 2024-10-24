@@ -38,7 +38,6 @@ if create_data_source_db == 1:
         show_tables(db_conn)
 
         print('-- create table')
-
         sql_create_table_command = f'CREATE TABLE IF NOT EXISTS {source_table_name} ('
         sql_create_table_command += 'id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'
         sql_create_table_command += 'classid INTEGER,'
@@ -53,7 +52,7 @@ if create_data_source_db == 1:
             c.execute(sql_create_table_command)
             print('-- table created')
         except Error as e:
-            print(e)
+            print(f'Error when creating source table {e}')
 
         print('-- show existing tables in DB end')
         show_tables(db_conn)
@@ -78,10 +77,11 @@ if create_AImonitor_db == 1:
         show_tables(db_conn)
 
         print('-- create table')
-
         sql_create_table_command = f'CREATE TABLE IF NOT EXISTS {monitor_table_name} ('
         sql_create_table_command += 'id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'
         sql_create_table_command += 'classid INTEGER,'
+        sql_create_table_command += 'usage INTEGER,'
+        sql_create_table_command += 'predictid INTEGER,'
         sql_create_table_command += 'data BLOB'
         sql_create_table_command += ');'
 
@@ -93,7 +93,7 @@ if create_AImonitor_db == 1:
             c.execute(sql_create_table_command)
             print('-- table created')
         except Error as e:
-            print(e)
+            print(f'Error when creating data table {e}')
 
         print('-- show existing tables in DB end')
         show_tables(db_conn)

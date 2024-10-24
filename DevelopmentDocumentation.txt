@@ -4,3 +4,6 @@ Documentation of steps to develop this showcase.
 2. Create helper py file to provide functions for SQLite DB - 
 3. Create SQLite DBs (DataScource and AiMonitor) and create tables. - create_DBs_and_tables.py
 4. Create simulated data, store in DataScource DB and visualize example data. - generate_simulated_data.py & visualize_simulated_data.py
+5. Create AISignalMonitor and AISignalProducer as data source - AISignalMonitor.py & AISignalProducer.py
+6. Create log classes for control and output - DummyLogger.py & DummyLoggerProd.py
+7. Create script to simulate AI Signal Monitor - run_AISignalMonitor.py
