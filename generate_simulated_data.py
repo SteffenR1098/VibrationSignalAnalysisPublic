@@ -7,7 +7,6 @@
     The "good" and "bad" signals are easy distinguishable. But the "additional" signals are just a small variation of the good signal with one small additional ampliude.
 '''
 
-
 import random
 #from pathlib import Path
 import numpy as np

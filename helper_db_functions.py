@@ -10,9 +10,11 @@ import io
 # ======================================================
 
 def create_connection(db_file):
-    # Create connection to DB
-    # param db_file: database file
-    # return: Connection object or None
+    '''
+        Create connection to DB
+        param db_file: database file
+        return: Connection object or None
+    '''
 
     db_conn = None
     try:
@@ -27,9 +29,11 @@ def create_connection(db_file):
 # ======================================================
 
 def show_tables(db_conn):
-    # Show all tables in DB
-    # param: Connection object
-    # return: None
+    '''
+        Show all tables in DB
+        param: Connection object
+        return: None
+    '''
 
     print('++ List of tables in db:')
 
@@ -42,10 +46,12 @@ def show_tables(db_conn):
 # ======================================================
 
 def show_data(db_conn, table):
-    # Show all data of table
-    # param: db_conn - Connection object
-    # param: table - table name
-    # return: None
+    '''
+        Show all data of table
+        param: db_conn - Connection object
+        param: table - table name
+        return: None
+    '''
 
     print(f'++ Show all data in table {table}:')
 
@@ -62,11 +68,13 @@ def show_data(db_conn, table):
 # ======================================================
 
 def show_some_data(db_conn, table):
-    # Show data of first 10 rows of table
-    # param: db_conn - Connection object
-    # param: table - table name
-    # return: None
-
+    '''
+        Show data of first 10 rows of table
+        param: db_conn - Connection object
+        param: table - table name
+        return: None
+    '''
+    
     print(f'++ Show data from first 10 rows in table {table}:')
 
     cur = db_conn.cursor()
@@ -83,10 +91,12 @@ def show_some_data(db_conn, table):
 # ======================================================
 
 def delete_data(db_conn, table):
-    # Delete all rows in table
-    # param: db_conn - Connection object
-    # param: table - table name
-    # return: None
+    '''
+        Delete all rows in table
+        param: db_conn - Connection object
+        param: table - table name
+        return: None
+    '''
 
     print(f'++ Delete all data from table {table}:')
 
@@ -100,10 +110,12 @@ def delete_data(db_conn, table):
 # ======================================================
 
 def vacuum_db(db_conn):
-    # Cleans up database and releases memory after deleting data
-    # param: db_conn - Connection object
-    # return: None
-
+    '''
+        Cleans up database and releases memory after deleting data
+        param: db_conn - Connection object
+        return: None
+    '''
+    
     print(f'++ Vacuum database:')
 
     #conn = sqlite3.connect('my_test.db', isolation_level=None)   #IN CASE OF PROBLEMS
@@ -116,14 +128,20 @@ def vacuum_db(db_conn):
 # ======================================================
 
 def trans_ndarray2blob(ndarray):
-    #print('++ Transform ndarray to blob')
+    '''
+        Transform ndarray to blob
+    '''
+
     out = io.BytesIO()
     np.save(out, ndarray)
     out.seek(0)
     return sqlite3.Binary(out.read())
 
 def trans_blob2ndarray(text):
-    #print('++ Transform blob to ndarray')
+    '''
+        Transform blob to ndarray
+    '''
+
     out = io.BytesIO(text)
     out.seek(0)
     return np.load(out)
@@ -131,13 +149,13 @@ def trans_blob2ndarray(text):
 # ======================================================
 
 def insert_blob_data(db_conn, table_name, data, data_class):
-    # param: Connection object
-    # param: data
-    # return: Cursor index
-
-    #print(f'++ Write signals of type: {data_class} as blob to db.')
-    #print(f'++ Shape of row data: {np.shape(data)}, type of {type(data)}')
-
+    '''
+        Function to insert data signal (blob) into table of SQLite db
+        param: Connection object
+        param: data
+        return: Cursor index
+    '''
+    
     # ==== create SQL statement ====
 
     sql_insert_table_command = f'INSERT INTO {table_name} (classid, data) VALUES (?,?)'
@@ -167,13 +185,13 @@ def insert_blob_data(db_conn, table_name, data, data_class):
 # ======================================================
 
 def get_blob_data(db_conn, table_name, data_class):
-     # param: Connection object
-    # param: data_class
-    # param: mode
-    # return: return_list
-    # return: classid_list
-
-    #print(f'++ Read data from table {table_name}.')
+    '''
+        Function to get data signals (blob) from table of SQLite db of specific class
+        param: Connection object
+        param: data_class
+        param: mode
+        return: return_list, classid_list
+    '''
 
     cur = db_conn.cursor()
 
@@ -181,11 +199,7 @@ def get_blob_data(db_conn, table_name, data_class):
 
     cur.execute(sql_getdata_command)
 
-    rows = cur.fetchall()  # returns class 'list'
-
-    # print(f'++ Shape of row data: {np.shape(rows)}, type of {type(rows)}')
-    # size_rows = np.shape(rows)
-    # print(f'++ Size of rows {size_rows[0]}')
+    rows = cur.fetchall() 
 
     size_rows = np.shape(rows)
     amount_of_signals = size_rows[0]
@@ -207,17 +221,18 @@ def get_blob_data(db_conn, table_name, data_class):
 
         index += 1
 
-    #return data_values, classid_list
     data_values_32 = np.float32(data_values)
-    return data_values_32
+    return data_values_32 #,classid_list
 
 # ======================================================
 
 def commit_data(db_conn):
-    # Commit all changes to DB
-    # param: db_conn - Connection object
-    # return: None
-
+    '''
+        Commit all changes to DB
+        param: db_conn - Connection object
+        return: None
+    '''
+    
     print(f'++ Commit all changes to DB.')
 
     db_conn.commit()
@@ -227,9 +242,12 @@ def commit_data(db_conn):
 # ======================================================
 
 def close_connection(db_conn):
-    # param: db_conn - Connection object
-    # return: None
-
+    '''
+        Function to close SQLite DB connection
+        param: db_conn - Connection object
+        return: None
+    '''
+    
     try:
         if db_conn:
             db_conn.close()
@@ -243,6 +261,9 @@ def close_connection(db_conn):
 # ======================================================
 
 def state_is_UTF8(state):
+    '''
+        Function to check UTF-8
+    '''
 
     if 'decode' not in dir(state):
         return False

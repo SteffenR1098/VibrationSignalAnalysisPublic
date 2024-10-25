@@ -5,6 +5,9 @@
 # Get db parameter
 
 def get_db_parameter(param_type):
+    '''
+        Function to provide parameter for DBs and tables 
+    '''
 
     if param_type == 'source_db_file':
         return r'DBs\datasource.db'
@@ -21,9 +24,9 @@ def get_db_parameter(param_type):
 # Get AI parameter
 
 def get_AI_parameter(param_type):
-
-    #print('get_AI_parameter')
-    #print(param_type)
+    '''
+        Function to provide parameter for ML module
+    '''
     
     if param_type == 'model_file':
         return r'SaveMLModel\model.ai'
@@ -36,6 +39,9 @@ def get_AI_parameter(param_type):
 # Get parameter for data generation
 
 def get_operational_parameter(param_type):
+    '''
+        Function to provide parameter for operational mode
+    '''
 
     if param_type == 'producer_wait_time':
         return 3 #in seconds
@@ -51,7 +57,9 @@ def get_operational_parameter(param_type):
 # Get parameter for data generation
 
 def get_parameter(param_type):
-
+    '''
+        Function to provide parameter for data signals and generation of simulated data
+    '''
     if param_type == 'amount_of_signals':
         return 1000
     elif param_type == 'signal_length':
@@ -120,6 +128,9 @@ def get_parameter(param_type):
 # FFT function
 
 def get_fft_values(y_values, T, N, f_s):
+    '''
+        Function to perform/simulate FFT module
+    '''
 
     import numpy as np
     from scipy.fftpack import fft

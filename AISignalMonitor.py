@@ -17,7 +17,8 @@ from os import path
 import time
 
 # ========================================================
-# own imports
+# own imports of functions that are used often and 
+# to provide central file to store all relevant parameters
 
 from helper_db_functions import trans_ndarray2blob, trans_blob2ndarray, state_is_UTF8, create_connection, close_connection
 from helper_functions import get_AI_parameter, get_parameter
@@ -129,8 +130,8 @@ class AISignalMonitor():
 
     def onSignal(self, signal):
         '''
-            method to recieve new data signal. Depending on the state of the Signal Monitor, a different action is taken
-            decision to separate functionality and general messaging part to avoid redundance in messaging (exception: messages for evaluation).
+            Method to recieve new data signal. Depending on the state of the Signal Monitor, a different action is taken.
+            Functionality and general messaging are separated in two different state evaluation parts  (to avoid redundance in messaging with exception of messages for evaluation).
             
         '''
         signal_is_empty = (signal is None)
@@ -275,7 +276,8 @@ class AISignalMonitor():
 
     def onStateChange(self, state):
         '''
-            method to change state of class
+            Method to change state of class
+            Includes functionality to check stored data, training the ML model and deleting collected data from DB
         '''
 
         # == open db connection

@@ -1,3 +1,8 @@
+'''
+    Script to run simulated scenario using AISignalMonitor and AISignalProducer.
+    Collecting data, training ML model and simulating operational mode for all signal data classes.
+'''
+
 from AISignalMonitor import AISignalMonitor
 from AISignalProducer import AISignalProducer
 from AImonitorLogger import AImonitorLogger
@@ -47,16 +52,7 @@ AImon.onStateChange('collecting_good')
 
 for i in range(0, 400):
     data = AIProd.onFrame()
-    #print(f'+ Shape of return data: {np.shape(data)}, type of {type(data)}, dimension {data.ndim}')
-    #print(data[0:10])
     AImon.onSignal(data)
-
-# AIProd.onStateChange('good')
-# AImon.onStateChange('collecting_good')
-
-# for i in range(0, 400):
-#     data = AIProd.onFrame()
-#     AImon.onSignal(data)
 
 # ========================================================
 
@@ -71,13 +67,6 @@ for i in range(0, 400):
     data = AIProd.onFrame()
     AImon.onSignal(data)
 
-# AIProd.onStateChange('bad')
-# AImon.onStateChange('collecting_bad')
-
-# for i in range(0, 400):
-#     data = AIProd.onFrame()
-#     AImon.onSignal(data)
-
 # ========================================================
 
 AImon.onStateChange('check_stored_data')
@@ -90,13 +79,6 @@ AImon.onStateChange('collecting_additional')
 for i in range(0, 400):
     data = AIProd.onFrame()
     AImon.onSignal(data)
-
-# AIProd.onStateChange('additional')
-# AImon.onStateChange('collecting_additional')
-
-# for i in range(0, 400):
-#     data = AIProd.onFrame()
-#     AImon.onSignal(data)
 
 # ========================================================
 
