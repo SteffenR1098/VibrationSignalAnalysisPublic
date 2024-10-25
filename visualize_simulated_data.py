@@ -1,7 +1,6 @@
 '''
     Script to visualize some data sets for good, bad and additional data as plots
 '''
-
 import numpy as np
 import matplotlib.pyplot as plt
 import sqlite3

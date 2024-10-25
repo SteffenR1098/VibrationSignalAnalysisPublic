@@ -2,7 +2,6 @@
     Script to run simulated scenario using AISignalMonitor and AISignalProducer.
     Collecting data, training ML model and simulating operational mode for all signal data classes.
 '''
-
 from AISignalMonitor import AISignalMonitor
 from AISignalProducer import AISignalProducer
 from AImonitorLogger import AImonitorLogger

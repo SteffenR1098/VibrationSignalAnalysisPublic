@@ -6,19 +6,18 @@
     The signals are then blurred with convolution masks and background and noise is added.
     The "good" and "bad" signals are easy distinguishable. But the "additional" signals are just a small variation of the good signal with one small additional ampliude.
 '''
+# ========================================================
+# Imports
 
 import random
-#from pathlib import Path
 import numpy as np
-#import matplotlib.pyplot as plt
 from scipy.fftpack import fft
 import time
 import sqlite3
 from sqlite3 import Error
-#from sys import getsizeof
 
-#from db_functions import create_connection, show_tables, show_data, show_some_data, commit_data, delete_data, close_connection
-#from db_blob_functions import insert_blob_data, get_blob_data
+# =========================================================
+# Own imports
 
 from helper_functions import get_db_parameter, get_fft_values, get_parameter
 from helper_db_functions import create_connection, show_tables, insert_blob_data, commit_data, delete_data, close_connection

@@ -1,7 +1,6 @@
 '''
     Simulate a data source that is similar to a vibration sensor and FFT module observing a rotation part.
 '''
-
 # ========================================================
 # imports
 

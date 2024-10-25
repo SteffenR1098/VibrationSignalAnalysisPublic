@@ -1,5 +1,5 @@
 '''
-    Class to act as dummy logger for AISignalMonitor with simple "print" statements
+    Class to act as dummy logger for AISignalMonitor with simple "print" statements.
 '''
 class AImonitorLogger():
     '''

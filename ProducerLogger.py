@@ -1,5 +1,5 @@
 '''
-    Class for dummy logger for signal producer
+    Class for dummy logger for signal producer.
 '''
 
 class ProducerLogger():

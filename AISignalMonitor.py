@@ -1,6 +1,6 @@
 '''
     Core class AI Signal Monitor to collect data, train AI model and classify in operational mode.
-    The Signal Monitor can be connected to a real life vibration sensor with FFT modul or to a "simulated" data source
+    The Signal Monitor can be connected to a real life vibration sensor with FFT modul or to a "simulated" data source.
 '''
 
 # ========================================================

@@ -1,5 +1,5 @@
 '''
-    Script to create DBs and tables for both AISignalMonitor and AISignalProducer
+    Script to create DBs and tables for both AISignalMonitor and AISignalProducer.
 '''
 import sqlite3
 from sqlite3 import Error

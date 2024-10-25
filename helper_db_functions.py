@@ -1,5 +1,5 @@
 '''
-    Py file for all SQLite db functionality
+    Py file for all SQLite db functionality.
 '''
 
 import sqlite3

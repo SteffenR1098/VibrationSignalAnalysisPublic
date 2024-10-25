@@ -1,5 +1,5 @@
 '''
-    Py file to store and provide parameter
+    Py file to store and provide parameter.
 '''
 # ========================================================
 # Get db parameter
