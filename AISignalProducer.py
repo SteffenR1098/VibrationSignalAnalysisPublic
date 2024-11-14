@@ -224,8 +224,6 @@ class AISignalProducer():
             # --------------------------------------------------------
             if self.state == 'good':
 
-                #self.logger.print(f'!!!! onFrame in state: {self.state} !!!!')
-
                 data_return = self.data_good[self.data_good_index,:]
 
                 self.data_good_index += 1
@@ -235,7 +233,6 @@ class AISignalProducer():
             # --------------------------------------------------------
             elif self.state == 'bad':
 
-                #self.logger.print(f'!!!! bad onFrame in state: {self.state} !!!!')
                 data_return = self.data_bad[self.data_bad_index,:]
 
                 self.data_bad_index += 1
@@ -245,7 +242,6 @@ class AISignalProducer():
             # --------------------------------------------------------
             elif self.state == 'additional':
 
-                #self.logger.print(f'!!!! bad onFrame in state: {self.state} !!!!')
                 data_return = self.data_add[self.data_add_index,:]
 
                 self.data_add_index += 1

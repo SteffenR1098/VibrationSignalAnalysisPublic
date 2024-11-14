@@ -7,6 +7,11 @@ __pycache__/
 save.py
 test.py
 
+#other files
+VibrationSignalAnalysisPublic_FeedbackJens.docx
+OverviewAndDetails.docx
+
+
 # C extensions
 *.so
 

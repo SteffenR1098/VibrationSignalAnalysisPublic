@@ -1,7 +1,13 @@
-Documentation of steps to develop this showcase.
+Documentation of steps to develop this showcase - based on the actual demo project with a potential customer inculding a deployment in a docker container (not included in this showcase).
+
+Design decisions:
+- use of SQLite3 and not additonal toolkit like sqlalchemy due to ressource limitations in edge computing.
+- use of sklearn to have a variaty of different ML models to test in development phase. The idea was to create a custom implementation of the selected ML model once decided (not included in this showcase)
+
+For current installations please see: requirements.txt
 
 1. Create helper py file to centrally store all parameters and function to provide. - helper_functions.py
-2. Create helper py file to provide functions for SQLite DB - 
+2. Create helper py file to provide functions for SQLite DB - helper_db_functions.py
 3. Create SQLite DBs (DataScource and AiMonitor) and create tables. - create_DBs_and_tables.py
 4. Create simulated data, store in DataScource DB and visualize example data. - generate_simulated_data.py & visualize_simulated_data.py
 5. Create AISignalMonitor and AISignalProducer as data source - AISignalMonitor.py & AISignalProducer.py
